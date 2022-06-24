@@ -1,0 +1,8 @@
+apiVersion: v1
+appVersion: "0.18.5"
+description: clickhouse-operator Helm Chart
+name: clickhouse-operator
+version: 0.1.0
+maintainers:
+- name: Vasiliy Grinko
+  email: vv.greenko@gmail.com

@@ -1,0 +1,37 @@
+apiVersion: "clickhouse.altinity.com/v1"
+kind: "ClickHouseInstallation"
+
+metadata:
+  name: "repl-05"
+
+spec:
+  defaults:
+    templates: 
+      dataVolumeClaimTemplate: default
+      podTemplate: clickhouse:19.6
+ 
+  configuration:
+    zookeeper:
+      nodes:
+      - host: zookeeper.{{ .Values.cluster.zookeeper_ns }}
+    clusters:
+      - name: replicated
+        layout:
+          shardsCount: {{ .Values.cluster.shardsCount }}
+          replicasCount: {{ .Values.cluster.replicasCount }}
+
+  templates:
+    volumeClaimTemplates:
+      - name: default
+        spec:
+          accessModes:
+          {{ toYaml .Values.cluster.persistence.accessModes }}
+          resources:
+            requests:
+              storage: {{ .Values.cluster.persistence.size }}
+    podTemplates:
+      - name: clickhouse:19.6
+        spec:
+          containers:
+            - name: clickhouse-pod
+              image: {{ .Values.cluster.image }}:{{ .Values.cluster.tag }}

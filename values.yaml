@@ -1,0 +1,21 @@
+clickhouse_operator:
+  version: 0.18.5
+
+cluster:
+  image: clickhouse/clickhouse-server
+  tag: 22.3
+  shardsCount: 1
+  replicasCount: 1
+  zookeeper_ns: zookeeper
+  log_level: error
+  persistence:
+    ## Persistent Volume Storage Class
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    # storageClass: "ssd"
+    accessModes:
+      - ReadWriteOnce
+    size: 5Gi      
