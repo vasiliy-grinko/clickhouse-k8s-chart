@@ -1,2 +1,2 @@
-# Helm chart for install clickhouse operator and clickhouse cluster
+# Helm chart for installing clickhouse operator and clickhouse cluster into Kubernetes
 
